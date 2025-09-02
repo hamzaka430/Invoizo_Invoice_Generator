@@ -11,23 +11,27 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://invoizo.app/">
 
-    <!-- Open Graph for social sharing -->
+    <!-- Open Graph for social sharing and search results -->
     <meta property="og:title" content="INVOIZO - Professional Invoice Generator">
     <meta property="og:description" content="Create, preview, and download beautiful invoices instantly for your business.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://invoizo.app/">
-    <meta property="og:image" content="/assets/invoizo-og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image" content="https://invoizo.app/images/invoizo.svg">
+    <meta property="og:image:alt" content="INVOIZO Invoice Generator Logo">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
     <meta property="og:site_name" content="INVOIZO">
     <meta property="og:locale" content="en_US">
+    <meta property="og:logo" content="https://invoizo.app/images/invoizo.svg">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="INVOIZO - Professional Invoice Generator">
     <meta name="twitter:description" content="Create, preview, and download beautiful invoices instantly for your business.">
-    <meta name="twitter:image" content="/assets/invoizo-og-image.png">
+    <meta name="twitter:image" content="https://invoizo.app/images/invoizo.svg">
+    <meta name="twitter:image:alt" content="INVOIZO Invoice Generator Logo">
     <meta name="twitter:site" content="@invoizo">
+    <meta name="twitter:creator" content="@invoizo">
 
     <!-- Additional SEO meta tags -->
     <meta name="language" content="en">
@@ -38,15 +42,62 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <!-- Favicon -->
+    <!-- Favicon and Web App Icons -->
     <link rel="icon" href="images/favicon.png" type="image/png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/favicon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Additional PWA and search optimization -->
+    <meta name="application-name" content="INVOIZO">
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="msapplication-TileImage" content="images/favicon.png">
+    <meta name="msapplication-config" content="/browserconfig.xml">
 
     <!-- Title -->
     <title>INVOIZO | Free Professional Invoice Generator Online</title>
+
+    <!-- Structured Data for Search Engines -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "INVOIZO",
+        "alternateName": "INVOIZO Invoice Generator",
+        "description": "Create, preview, and download beautiful invoices instantly for your business. Professional invoice generator with free templates.",
+        "url": "https://invoizo.app/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://invoizo.app/images/invoizo.svg",
+            "width": "512",
+            "height": "512"
+        },
+        "image": "https://invoizo.app/images/invoizo.svg",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "Create professional invoices",
+            "Download PDF invoices",
+            "Customizable templates",
+            "Real-time preview",
+            "Free to use"
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "DezignWise"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "INVOIZO Team"
+        }
+    }
+    </script>
 
     <!-- Google Fonts Preconnect and Stylesheets -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
