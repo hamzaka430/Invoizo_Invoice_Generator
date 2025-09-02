@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags for SEO and accessibility -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="INVOIZO is a professional, free invoice generator. Create, preview, and download beautiful invoices instantly for your business.">
+    <meta name="keywords" content="invoice generator, free invoice, professional invoice, business invoice, create invoice, download invoice, INVOIZO">
+    <meta name="author" content="DezignWise, INVOIZO Team">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://invoizo.com/">
+
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="INVOIZO - Professional Invoice Generator">
+    <meta property="og:description" content="Create, preview, and download beautiful invoices instantly for your business.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://invoizo.com/">
+    <meta property="og:image" content="/assets/invoizo-og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="INVOIZO">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="INVOIZO - Professional Invoice Generator">
+    <meta name="twitter:description" content="Create, preview, and download beautiful invoices instantly for your business.">
+    <meta name="twitter:image" content="/assets/invoizo-og-image.png">
+    <meta name="twitter:site" content="@invoizo">
+
+    <!-- Additional SEO meta tags -->
+    <meta name="language" content="en">
+    <meta name="geo.region" content="PK">
+    <meta name="geo.placename" content="Pakistan">
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Title -->
+    <title>INVOIZO | Free Professional Invoice Generator Online</title>
+
+    <!-- Google Fonts Preconnect and Stylesheets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Preload main stylesheet for faster rendering -->
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="preload" href="css/invoice-styles.css" as="style">
+    <link rel="preload" href="js/lazy-loading.js" as="script">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
+
+    <!-- Main Stylesheets -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/invoice-styles.css" rel="stylesheet">
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "INVOIZO",
+        "description": "Professional invoice generator for businesses. Create, preview, and download beautiful invoices instantly.",
+        "url": "https://invoizo.com/",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "DezignWise",
+            "url": "https://www.dezignwise.online/"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "DezignWise",
+            "url": "https://www.dezignwise.online/"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "INVOIZO",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://invoizo.com/logo.png"
+            }
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+92-332-3500-430",
+            "contactType": "customer service",
+            "email": "invoizo@gmail.com",
+            "availableLanguage": "English"
+        },
+        "sameAs": [
+            "https://www.dezignwise.online/"
+        ]
+    }
+    </script>
+
+    <!-- FAQ Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How to create an invoice with INVOIZO?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Simply fill in your company details, client information, add items, and click generate. You can preview and download your professional invoice instantly."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is INVOIZO free to use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, INVOIZO offers a free plan that allows you to create professional invoices without any cost."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <!-- ===================== Animated Bar Loader ===================== -->
+    <div class="loader-overlay" id="loader">
+        <div class="loader"></div>
+        <div class="loader-text">INVOIZO ⯀</div>
+    </div>
+
+    <!-- ===================== Navigation Bar ===================== -->
+    <nav id="navbar" aria-label="Main Navigation">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo" aria-label="INVOIZO Home">
+                <img src="images/invoizo.svg" alt="INVOIZO Logo" class="responsive-logo">
+            </a>
+            <div class="menu-toggle" id="menuToggle" aria-label="Open Menu" tabindex="0" role="button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link" aria-current="page">HOME</a></li>
+                <li><a href="#invoice" class="nav-link">INVOICE</a></li>
+                <li><a href="#about" class="nav-link">FEATURES</a></li>
+                <li><a href="#contact" class="nav-link">CONTACT</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ===================== Hero Section ===================== -->
+    <section id="home" class="hero">
+        <!-- Decorative Animated Objects for Visual Appeal -->
+        <div class="floating-objects" aria-hidden="true">
+            <div class="floating-circle"></div>
+            <div class="floating-circle"></div>
+            <div class="floating-square"></div>
+            <div class="floating-line"></div>
+        </div>
+        <div class="hero-decoration" aria-hidden="true"></div>
+        <div class="hero-content">
+            <h1>Invoice Made Simple</h1>
+            <p class="subtitle">Elegant Invoice Generator</p>
+            <a href="#invoice" class="cta-button">Generate Invoice</a>
+        </div>
+    </section>
+
+    <!-- ===================== Invoice Generator Section ===================== -->
+    <section id="invoice" class="invoice-generator">
+        <div class="container">
+            <div class="invoice-header fade-in">
+                <h2>Professional Invoice Generator</h2>
+                <p>Create beautiful invoices instantly</p>
+                <div class="black-line"></div>
+            </div>
+            <!-- Invoice Form and Preview -->
+            <div class="invoice-content fade-in">
+                <!-- ===================== Invoice Form ===================== -->
+                <div class="invoice-form-wrapper">
+                    <div class="invoice-form">
+                        <form id="invoiceForm" aria-label="Invoice Form">
+                            <!-- Company Information Section -->
+                            <div class="form-section">
+                                <h3>Company Information</h3>
+                                <div class="form-group">
+                                    <input type="text" id="company_name" name="company_name" placeholder=" " required>
+                                    <label for="company_name">Company Name</label>
+                                </div>
+                                <div class="form-group">
+                                    <textarea id="company_address" name="company_address" rows="2" placeholder=" " required></textarea>
+                                    <label for="company_address">Company Address</label>
+                                </div>
+                            </div>
+
+                            <!-- Invoice Details Section -->
+                            <div class="form-section">
+                                <h3>Invoice Details</h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <input type="text" id="invoice_no" name="invoice_no" placeholder=" " required>
+                                        <label for="invoice_no">Invoice Number</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="date" id="invoice_date" name="invoice_date" placeholder=" " required>
+                                        <label for="invoice_date">Invoice Date</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Client Information Section -->
+                            <div class="form-section">
+                                <h3>Bill To</h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <input type="text" id="client_name" name="client_name" placeholder=" " required>
+                                        <label for="client_name">Client Name</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="tel" id="client_phone" name="client_phone" placeholder=" " required>
+                                        <label for="client_phone">Client Phone</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <textarea id="client_address" name="client_address" rows="2" placeholder=" " required></textarea>
+                                    <label for="client_address">Client Address</label>
+                                </div>
+                            </div>
+
+                            <!-- Items Section (Add/Remove Items) -->
+                            <div class="form-section">
+                                <h3>Items</h3>
+                                <div class="items-container">
+                                    <div class="items-header">
+                                        <span>Item</span>
+                                        <span>Qty</span>
+                                        <span>Price</span>
+                                        <span>Total</span>
+                                        <span></span>
+                                    </div>
+                                    <div id="itemsList">
+                                        <div class="item-row">
+                                            <div class="form-group item-input">
+                                                <input type="text" name="item_name[]" id="item_name_1" placeholder=" " required>
+                                                <label for="item_name_1">Item Name</label>
+                                            </div>
+                                            <div class="form-group item-input">
+                                                <input type="number" name="item_qty[]" id="item_qty_1" placeholder=" " min="1" required>
+                                                <label for="item_qty_1">Quantity</label>
+                                            </div>
+                                            <div class="form-group item-input">
+                                                <input type="number" name="item_price[]" id="item_price_1" placeholder=" " step="0.01" min="0" required>
+                                                <label for="item_price_1">Unit Price</label>
+                                            </div>
+                                            <div class="form-group item-total">
+                                                <input type="text" name="item_total[]" id="item_total_1" placeholder=" " readonly>
+                                            </div>
+                                            <button type="button" class="remove-item">X</button>
+                                        </div>
+                                    </div>
+                                    <button type="button" id="addItem" class="add-item-btn">Add Item</button>
+                                </div>
+                            </div>
+
+                            <!-- Payment and Totals Section -->
+                            <div class="form-section">
+                                <div class="form-row">
+                                    <!-- Payment Information -->
+                                    <div class="payment-info-wrapper">
+                                        <h3>Payment Information</h3>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <input type="text" id="bank_name" name="bank_name" placeholder=" " required>
+                                                <label for="bank_name">Bank Name</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" id="account_name" name="account_name" placeholder=" " required>
+                                                <label for="account_name">Account Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <input type="text" id="account_no" name="account_no" placeholder=" " required>
+                                                <label for="account_no">Account Number</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="date" id="due_date" name="due_date" placeholder=" " required>
+                                                <label for="due_date">Payment Due Date</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Totals Section -->
+                                    <div class="totals-wrapper">
+                                        <h3>Totals</h3>
+                                        <div class="form-group total-input">
+                                            <input type="text" id="subtotal" name="subtotal" readonly>
+                                            <label for="subtotal">Subtotal</label>
+                                        </div>
+                                        <div class="form-group total-input">
+                                            <input type="number" id="tax" name="tax" placeholder=" " min="0" max="100" step="0.01">
+                                            <label for="tax">Tax (%)</label>
+                                        </div>
+                                        <div class="form-group total-input final-total">
+                                            <input type="text" id="total_amount" name="total_amount" readonly>
+                                            <label for="total_amount">Total Amount</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" id="previewBtn" class="submit-btn">Preview Invoice</button>
+                                <button type="submit" class="submit-btn generate-btn">Generate Invoice</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- ===================== Invoice Preview ===================== -->
+                <div class="invoice-preview" id="invoicePreview" style="display: none;">
+                    <div class="invoice-document">
+                        <div class="invoice-header-doc">
+                            <div class="logo" id="preview_company_name">DezignWise</div>
+                            <div class="invoice-title">INVOICE</div>
+                        </div>
+
+                        <div class="invoice-info-section">
+                            <div class="bill-to">
+                                <h4>BILLED TO:</h4>
+                                <p id="preview_client_name">Hamza Zaka</p>
+                                <p id="preview_client_phone">=92 332 3500430</p>
+                                <p id="preview_client_address">123 Main St, Anytown, Karachi</p>
+                            </div>
+                            <div class="invoice-details">
+                                <p>Invoice No. <span id="preview_invoice_no">01</span></p>
+                                <p id="preview_invoice_date">16 June 2025</p>
+                            </div>
+                        </div>
+
+                        <table class="items-table">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Quantity</th>
+                                    <th>Unit Price</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="preview_items">
+                                <!-- Items will be populated here -->
+                            </tbody>
+                        </table>
+
+                        <div class="totals">
+                            <table>
+                                <tr>
+                                    <td>Subtotal</td>
+                                    <td id="preview_subtotal">$500</td>
+                                </tr>
+                                <tr>
+                                    <td>Tax (<span id="preview_tax_rate">0</span>%)</td>
+                                    <td id="preview_tax_amount">$0</td>
+                                </tr>
+                                <tr class="total-row">
+                                    <td>Total</td>
+                                    <td id="preview_total_amount">$500</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="payment-info">
+                            <div class="payment-details">
+                                <h4>PAYMENT INFORMATION</h4>
+                                <p id="preview_bank_name">Briard Bank</p>
+                                <p>Account Name: <span id="preview_account_name">John Doe</span></p>
+                                <p>Account No.: <span id="preview_account_no">123-456-7890</span></p>
+                                <p>Pay by: <span id="preview_due_date">5 July 2025</span></p>
+                            </div>
+                            <div class="company-info">
+                                <div class="company-name" id="preview_company_signature">John Doe</div>
+                                <div class="company-address" id="preview_company_address">123 Anywhere St., Any City, ST 12345</div>
+                            </div>
+                        </div>
+
+                        <div class="thank-you">Thank you!</div>
+
+                    </div>
+                    
+                    <div class="preview-actions">
+                        <button type="button" id="downloadPDF" class="submit-btn">Download PDF</button>
+                        <button type="button" id="editInvoice" class="submit-btn">Edit Invoice</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== About/Features Section ===================== -->
+    <section id="about" class="about">
+        <div class="container">
+            <!-- Introduction with large quote -->
+            <div class="about-intro fade-in">
+                <div class="quote-block">
+                    <span class="quote-mark">"</span>
+                    <h3>Simplifying business invoicing, one click at a time. Create professional invoices instantly.</h3>
+                    <div class="quote-author">
+                        <span class="author-line"></span>
+                        <p>INVOIZO Team</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="black-line"></div>
+
+            <!-- Stats Section -->
+            <div class="stats-grid fade-in lazy-content" data-lazy-content="stats">
+                <div class="stat-item">
+                    <div class="stat-number">100K+</div>
+                    <div class="stat-label">Happy Customers</div>
+                    <div class="stat-decoration"></div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5min</div>
+                    <div class="stat-label">Average Creation Time</div>
+                    <div class="stat-decoration"></div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Professional Templates</div>
+                    <div class="stat-decoration"></div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Free to Use</div>
+                    <div class="stat-decoration"></div>
+                </div>
+            </div>
+
+            <!-- Philosophy Section with offset layout -->
+            <div class="philosophy-section fade-in">
+                <div class="philosophy-header">
+                    <h2>Features</h2>
+                    <div class="header-decoration"></div>
+                </div>
+                <div class="philosophy-content">
+                    <div class="philosophy-main">
+                        <p class="lead-text">We believe in making invoicing effortless. Every feature, every template, every tool serves to streamline your business operations.</p>
+                    </div>
+                    <div class="philosophy-points">
+                        <div class="point-item">
+                            <span class="point-number">01</span>
+                            <h4>Quick Creation</h4>
+                            <p>Generate invoices in under 60 seconds</p>
+                        </div>
+                        <div class="point-item">
+                            <span class="point-number">02</span>
+                            <h4>Professional Templates</h4>
+                            <p>Beautiful, customizable invoice designs</p>
+                        </div>
+                        <div class="point-item">
+                            <span class="point-number">03</span>
+                            <h4>Auto Calculations</h4>
+                            <p>Tax, discounts, and totals calculated automatically</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Process Timeline -->
+            <div class="process-timeline fade-in lazy-content" data-lazy-content="timeline">
+                <h2 class="section-subtitle">How It Works</h2>
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>Enter Details</h4>
+                            <p>Add your business & client info</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>Add Items</h4>
+                            <p>Include products or services</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>Customize</h4>
+                            <p>Choose template and styling</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>Generate</h4>
+                            <p>Download or send instantly</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Values Grid -->
+            <div class="values-section fade-in lazy-content" data-lazy-content="values">
+                <div class="values-header">
+                    <div class="black-square"></div>
+                    <h2>Why Choose Us</h2>
+                    <div class="black-square"></div>
+                </div>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">—</div>
+                        <h4>Simplicity</h4>
+                    </div>
+                    <div class="value-card black">
+                        <div class="value-icon">+</div>
+                        <h4>Efficiency</h4>
+                    </div>
+                    <div class="value-card black">
+                        <div class="value-icon">○</div>
+                        <h4>Accuracy</h4>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">□</div>
+                        <h4>Security</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== Services Section (Commented Out) ===================== -->
+    <!-- <section id="services" class="services">
+        <div class="container">
+            <div class="services-header fade-in">
+                <h2>Pricing Plans</h2>
+            </div>
+            
+            <div class="asymmetric-grid fade-in">
+                <div class="service-large">
+                    <h3>Free Plan</h3>
+                    <p>Perfect for small businesses and freelancers. Create up to 5 invoices per month with basic templates and essential features.</p>
+                    <a href="#contact" class="service-tag">Start Free</a>
+                </div>
+                <div class="service-small">
+                    <div class="service-number">$0</div>
+                    <h4>Forever Free</h4>
+                </div>
+            </div>
+            
+            <div class="asymmetric-grid reverse fade-in">
+                <div class="service-small">
+                    <div class="service-number">$9</div>
+                    <h4>Per Month</h4>
+                </div>
+                <div class="service-large">
+                    <h3>Pro Plan</h3>
+                    <p>Unlimited invoices, premium templates, automatic reminders, payment tracking, and priority customer support for growing businesses.</p>
+                    <a href="#contact" class="service-tag">Go Pro</a>
+                </div>
+            </div>
+            
+            <div class="asymmetric-grid fade-in">
+                <div class="service-large">
+                    <h3>Enterprise</h3>
+                    <p>Custom solutions for large organizations. Multi-user access, branded templates, API integration, and dedicated account management.</p>
+                    <a href="#contact" class="service-tag">Contact Sales</a>
+                </div>
+                <div class="service-small">
+                    <div class="service-number">$$</div>
+                    <h4>Custom Quote</h4>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- ===================== Contact Section ===================== -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-grid fade-in">
+                <div class="contact-info">
+                    <h2>Get Started</h2>
+                    <div class="info-item">
+                        <h4>Support Email</h4>
+                        <p>invoizo@gmail.com</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Sales</h4>
+                        <p>+92 332 3500 430</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Business Hours</h4>
+                        <p>24/7 Online Support</p>
+                    </div>
+                </div>
+                
+                <div class="contact-divider"></div>
+                
+                <div class="contact-form">
+                    <form action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="b846843a-6be3-4d10-add7-b7d628eb3567">
+                        <input type="hidden" name="subject" value="Form Submission from INVOIZO">
+                        <input type="hidden" name="from_name" value="INVOIZO Contact Form">
+                        <input type="hidden" name="redirect" value="https://web3forms.com/success">
+                        
+                        <div class="form-group">
+                            <input type="hidden" name="subject" value="New Submission from Web3Forms">
+                            <input type="text" id="contact_business_name" name="name" placeholder=" " required>
+                            <label for="contact_business_name">Full Name</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="contact_email" name="email" placeholder=" " required>
+                            <label for="contact_email">Email Address</label>
+                        </div>
+                        
+                        <!-- Enhanced Honeypot Spam Protection -->
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                        <input type="text" name="honeypot" style="display: none;" tabindex="-1" autocomplete="off">
+                        <input type="text" name="_gotcha" style="display: none;" tabindex="-1" autocomplete="off">
+                        
+                        <!-- Additional spam protection fields -->
+                        <input type="hidden" name="replyto" value="">
+                        <input type="hidden" name="cc" value="">
+                        <input type="hidden" name="bcc" value="">
+                        
+                        <div class="form-group">
+                            <textarea id="contact_message" name="message" rows="4" placeholder=" " required></textarea>
+                            <label for="contact_message">Tell us about your invoicing needs</label>
+                        </div>
+                        
+                        <!-- hCaptcha for spam protection with better configuration -->
+                        <div class="h-captcha" 
+                             data-captcha="true"
+                             data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+                             data-theme="light"
+                             data-size="normal"></div>
+                        
+                        <button type="submit" class="submit-btn">Contact Us</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== Footer ===================== -->
+    <footer>
+        <p>© 2025 INVOIZO — Professional Invoice Generator by <a href="https://www.dezignwise.Online/" target="_blank" rel="nofollow noopener" style="color: #000; font-weight: 700;">DezignWise</a></p>
+    </footer>
+    <!-- JavaScript Files -->
+    <!-- Defer JavaScript for faster page load -->
+    <script src="js/lazy-loading.js" defer></script>
+    <script src="js/script.js" defer></script>
+    <script src="js/invoice-script.js" defer></script>
+    
+    <!-- Enhanced hCaptcha and Spam Protection Validation Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form[action="https://api.web3forms.com/submit"]');
+        
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                // Check hCaptcha
+                const hCaptcha = form.querySelector('textarea[name="h-captcha-response"]');
+                if (!hCaptcha || !hCaptcha.value) {
+                    e.preventDefault();
+                    alert("Please complete the captcha verification before submitting the form.");
+                    return false;
+                }
+                
+                // Check honeypot fields (should be empty)
+                const honeypot = form.querySelector('input[name="honeypot"]');
+                const gotcha = form.querySelector('input[name="_gotcha"]');
+                const botcheck = form.querySelector('input[name="botcheck"]');
+                
+                if ((honeypot && honeypot.value !== '') || 
+                    (gotcha && gotcha.value !== '') || 
+                    (botcheck && botcheck.checked)) {
+                    e.preventDefault();
+                    return false; // Silently block spam
+                }
+                
+                // Basic content validation
+                const message = form.querySelector('textarea[name="message"]').value.toLowerCase();
+                const spamKeywords = ['bitcoin', 'crypto', 'loan', 'casino', 'pharmacy', 'viagra', 'pills'];
+                
+                for (let keyword of spamKeywords) {
+                    if (message.includes(keyword)) {
+                        e.preventDefault();
+                        alert("Your message contains content that cannot be processed. Please modify your message.");
+                        return false;
+                    }
+                }
+                
+                return true;
+            });
+        }
+    });
+    </script>
+    
+    <!-- Web3Forms hCaptcha Script -->
+    <script src="https://web3forms.com/client/script.js" async defer></script>
+</body>
+</html>
