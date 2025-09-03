@@ -665,13 +665,11 @@
                 
                 <div class="contact-form">
                     <form action="https://api.web3forms.com/submit" method="POST">
-                        <input type="hidden" name="access_key" value="b846843a-6be3-4d10-add7-b7d628eb3567">
+                        <input type="hidden" name="access_key" value="91a580d2-1a11-4c96-8db6-f29dee57ec65">
                         <input type="hidden" name="subject" value="Form Submission from INVOIZO">
-                        <input type="hidden" name="from_name" value="INVOIZO Contact Form">
                         <input type="hidden" name="redirect" value="https://web3forms.com/success">
                         
                         <div class="form-group">
-                            <input type="hidden" name="subject" value="New Submission from Web3Forms">
                             <input type="text" id="contact_business_name" name="name" placeholder=" " required>
                             <label for="contact_business_name">Full Name</label>
                         </div>
@@ -681,28 +679,11 @@
                             <label for="contact_email">Email Address</label>
                         </div>
                         
-                        <!-- Enhanced Honeypot Spam Protection -->
-                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-                        <input type="text" name="honeypot" style="display: none;" tabindex="-1" autocomplete="off">
-                        <input type="text" name="_gotcha" style="display: none;" tabindex="-1" autocomplete="off">
-                        
-                        <!-- Additional spam protection fields -->
-                        <input type="hidden" name="replyto" value="">
-                        <input type="hidden" name="cc" value="">
-                        <input type="hidden" name="bcc" value="">
-                        
                         <div class="form-group">
                             <textarea id="contact_message" name="message" rows="4" placeholder=" " required></textarea>
                             <label for="contact_message">Tell us about your invoicing needs</label>
                         </div>
-                        
-                        <!-- hCaptcha for spam protection with better configuration -->
-                        <div class="h-captcha" 
-                             data-captcha="true"
-                             data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
-                             data-theme="light"
-                             data-size="normal"></div>
-                        
+                                         
                         <button type="submit" class="submit-btn">Contact Us</button>
                     </form>
                 </div>
@@ -719,53 +700,6 @@
     <script src="js/lazy-loading.js" defer></script>
     <script src="js/script.js" defer></script>
     <script src="js/invoice-script.js" defer></script>
-    
-    <!-- Enhanced hCaptcha and Spam Protection Validation Script -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.querySelector('form[action="https://api.web3forms.com/submit"]');
-        
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                // Check hCaptcha
-                const hCaptcha = form.querySelector('textarea[name="h-captcha-response"]');
-                if (!hCaptcha || !hCaptcha.value) {
-                    e.preventDefault();
-                    alert("Please complete the captcha verification before submitting the form.");
-                    return false;
-                }
-                
-                // Check honeypot fields (should be empty)
-                const honeypot = form.querySelector('input[name="honeypot"]');
-                const gotcha = form.querySelector('input[name="_gotcha"]');
-                const botcheck = form.querySelector('input[name="botcheck"]');
-                
-                if ((honeypot && honeypot.value !== '') || 
-                    (gotcha && gotcha.value !== '') || 
-                    (botcheck && botcheck.checked)) {
-                    e.preventDefault();
-                    return false; // Silently block spam
-                }
-                
-                // Basic content validation
-                const message = form.querySelector('textarea[name="message"]').value.toLowerCase();
-                const spamKeywords = ['bitcoin', 'crypto', 'loan', 'casino', 'pharmacy', 'viagra', 'pills'];
-                
-                for (let keyword of spamKeywords) {
-                    if (message.includes(keyword)) {
-                        e.preventDefault();
-                        alert("Your message contains content that cannot be processed. Please modify your message.");
-                        return false;
-                    }
-                }
-                
-                return true;
-            });
-        }
-    });
-    </script>
-    
-    <!-- Web3Forms hCaptcha Script -->
-    <script src="https://web3forms.com/client/script.js" async defer></script>
+
 </body>
 </html>

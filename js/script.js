@@ -1,14 +1,4 @@
-/*
-
-Tooplate 2141 Minimal White
-
-https://www.tooplate.com/view/2141-minimal-white
-
-*/
-
-// JavaScript Document
-
-        // 3D Donut Loader Control with Performance Optimization
+  // 3D Donut Loader Control with Performance Optimization
         window.addEventListener('load', function() {
             const loader = document.getElementById('loader');
             
