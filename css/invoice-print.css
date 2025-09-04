@@ -1,7 +1,46 @@
 /* invoice-print.css: Fixed desktop/A4 layout for invoice PDF/print (no responsive or mobile styles) */
 
-/* Import fonts for PDF rendering */
+/* Font declarations for PDF rendering - Direct embedding for better compatibility */
+@font-face {
+    font-family: 'RoxboroughCF';
+    src: url('../fonts/fonnts.com-roxboroughcf-regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'RoxboroughCF';
+    src: url('../fonts/fonnts.com-roxboroughcf-bold.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'RoxboroughCF';
+    src: url('../fonts/fonnts.com-roxboroughcf-medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: block;
+}
+
+/* Import additional styles */
 @import url('../css/invoice-styles.css');
+
+/* Preload critical fonts for PDF rendering */
+* {
+  font-variant-ligatures: none;
+}
+
+/* Force font loading for PDF generation */
+body::before {
+  content: '';
+  font-family: 'RoxboroughCF';
+  position: absolute;
+  left: -9999px;
+  visibility: hidden;
+}
 
 @page {
   size: A4;
@@ -71,6 +110,27 @@ html::before {
   letter-spacing: 3px !important;
   text-transform: uppercase !important;
   font-family: 'RoxboroughCF', 'Times New Roman', 'Georgia', serif !important;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+/* Additional selectors for more specific targeting */
+.invoice-header-doc .logo,
+.invoice-header-doc .invoice-title,
+#preview_company_name {
+  font-family: 'RoxboroughCF', 'Times New Roman', 'Georgia', serif !important;
+  font-weight: bold !important;
+  font-size: 2.5rem !important;
+  color: #000 !important;
+  letter-spacing: 3px !important;
+  text-transform: uppercase !important;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+  -webkit-font-feature-settings: "liga" 0 !important;
+  font-feature-settings: "liga" 0 !important;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
 }
 
 .invoice-info-section {
@@ -152,7 +212,7 @@ html::before {
   margin: 30px 0 !important;
   width: 100% !important;
   max-width: 350px !important;
-  margin-left: auto !important;
+  margin-left: 395px !important;
   background: #F5F5F5 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
@@ -166,6 +226,13 @@ html::before {
   width: 100% !important;
   border-collapse: collapse !important;
   background: #F5F5F5 !important;
+}
+
+/* Ensure consistent positioning for PDF generation */
+@media print, screen and (min-width: 1201px) {
+  .totals {
+    margin-left: 395px !important;
+  }
 }
 
 .totals tr {
@@ -335,7 +402,7 @@ html::before {
   .invoice-document .totals {
     position: relative !important;
     margin-left: auto !important;
-    width: 350px !important;
+    width: 395px !important;
   }
   
   .invoice-document .company-info {
@@ -351,7 +418,7 @@ html::before {
 .totals, .invoice-preview .totals, .invoice-document .totals {
   margin: 30px 0 !important;
   width: 100% !important;
-  max-width: 350px !important;
+  max-width: 395px !important;
   margin-left: auto !important;
   background: #F5F5F5 !important;
   border-radius: 0 !important;

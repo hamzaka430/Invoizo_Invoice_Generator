@@ -239,35 +239,93 @@ document.addEventListener('DOMContentLoaded', function() {
             downloadPDF.textContent = 'Generating PDF...';
             downloadPDF.disabled = true;
 
-            // Create a dedicated print container with full A4 dimensions
-            const printContainer = document.createElement('div');
-            printContainer.style.cssText = `
-                position: fixed;
-                top: -10000px;
-                left: -10000px;
-                width: 210mm;
-                height: 297mm;
-                background: #f5f5f5;
-                z-index: -1000;
-                font-family: Arial, sans-serif;
-                color: #000;
-                box-sizing: border-box;
-            `;
+            // Function to ensure fonts are loaded before PDF generation
+            function ensureFontsLoaded() {
+                return new Promise((resolve) => {
+                    // Check if RoxboroughCF font is available
+                    function checkFontLoaded() {
+                        const testElement = document.createElement('div');
+                        testElement.style.fontFamily = 'RoxboroughCF, serif';
+                        testElement.style.fontSize = '24px';
+                        testElement.style.position = 'absolute';
+                        testElement.style.left = '-9999px';
+                        testElement.style.visibility = 'hidden';
+                        testElement.textContent = 'FONT TEST';
+                        document.body.appendChild(testElement);
+                        
+                        const width = testElement.offsetWidth;
+                        document.body.removeChild(testElement);
+                        
+                        // Test with fallback font
+                        const fallbackElement = document.createElement('div');
+                        fallbackElement.style.fontFamily = 'serif';
+                        fallbackElement.style.fontSize = '24px';
+                        fallbackElement.style.position = 'absolute';
+                        fallbackElement.style.left = '-9999px';
+                        fallbackElement.style.visibility = 'hidden';
+                        fallbackElement.textContent = 'FONT TEST';
+                        document.body.appendChild(fallbackElement);
+                        
+                        const fallbackWidth = fallbackElement.offsetWidth;
+                        document.body.removeChild(fallbackElement);
+                        
+                        return width !== fallbackWidth;
+                    }
+                    
+                    if (document.fonts && document.fonts.ready) {
+                        document.fonts.ready.then(() => {
+                            // Additional check for custom font
+                            if (checkFontLoaded()) {
+                                setTimeout(resolve, 300);
+                            } else {
+                                // If font not loaded, wait a bit more
+                                setTimeout(resolve, 800);
+                            }
+                        });
+                    } else {
+                        // Fallback for browsers without FontFaceSet API
+                        setTimeout(() => {
+                            if (checkFontLoaded()) {
+                                resolve();
+                            } else {
+                                setTimeout(resolve, 500);
+                            }
+                        }, 1000);
+                    }
+                });
+            }
 
-            // Create a wrapper for the full page background
-            const pageWrapper = document.createElement('div');
-            pageWrapper.style.cssText = `
-                width: 210mm;
-                height: 297mm;
-                background: #f5f5f5;
-                position: relative;
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            `;
+            // Wait for fonts to be loaded before proceeding
+            ensureFontsLoaded().then(() => {
+                // Create a dedicated print container with full A4 dimensions
+                const printContainer = document.createElement('div');
+                printContainer.style.cssText = `
+                    position: fixed;
+                    top: -10000px;
+                    left: -10000px;
+                    width: 210mm;
+                    height: 297mm;
+                    background: #f5f5f5;
+                    z-index: -1000;
+                    font-family: Arial, sans-serif;
+                    color: #000;
+                    box-sizing: border-box;
+                `;
 
-            // Clone the invoice content
-            const clonedInvoice = invoiceDocument.cloneNode(true);
+                // Create a wrapper for the full page background
+                const pageWrapper = document.createElement('div');
+                pageWrapper.style.cssText = `
+                    width: 210mm;
+                    height: 297mm;
+                    background: #f5f5f5;
+                    position: relative;
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                `;
+
+                // Clone the invoice content
+                const clonedInvoice = invoiceDocument.cloneNode(true);
             
             // Apply print-specific styles to the cloned content
             clonedInvoice.style.cssText = `
@@ -292,7 +350,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Apply critical styles to ensure proper rendering
             const elementsToStyle = [
                 { selector: '.invoice-header-doc', styles: 'display: flex !important; justify-content: space-between !important; align-items: center !important; margin-bottom: 60px !important; margin-top: 45px !important; flex-shrink: 0 !important;' },
-                { selector: '.logo, .invoice-title', styles: 'font-size: 2.5rem !important; font-weight: bold !important; color: #000 !important; letter-spacing: 3px !important; text-transform: uppercase !important; font-family: "Times New Roman", Georgia, serif !important;' },
+                { selector: '.logo, .invoice-title', styles: 'font-size: 2.5rem !important; font-weight: bold !important; color: #000 !important; letter-spacing: 3px !important; text-transform: uppercase !important; font-family: "RoxboroughCF", "Times New Roman", Georgia, serif !important;' },
                 { selector: '.invoice-info-section', styles: 'display: flex !important; justify-content: space-between !important; margin-bottom: 50px !important; align-items: flex-start !important; flex-shrink: 0 !important;' },
                 { selector: '.items-table', styles: 'width: 100% !important; border-collapse: collapse !important; margin-bottom: 30px !important; background: #F5F5F5 !important; flex-shrink: 0 !important;' },
                 { selector: '.payment-info', styles: 'display: flex !important; justify-content: space-between !important; align-items: flex-start !important; margin-top: 40px !important; flex-shrink: 0 !important;' },
@@ -302,7 +360,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Special handling for totals section to ensure exact match
             const totalsElements = clonedInvoice.querySelectorAll('.totals');
             totalsElements.forEach(totals => {
-                totals.style.cssText = 'margin: 30px 0 !important; width: 100% !important; max-width: 350px !important; margin-left: auto !important; background: #F5F5F5 !important; border-radius: 0 !important; box-shadow: none !important; padding: 25px !important; border: 1px solid #F5F5F5 !important; flex-shrink: 0 !important; font-family: Arial, sans-serif !important;';
+                // For PDF generation, always use fixed margin-left: 395px for consistent layout
+                totals.style.cssText = 'margin: 30px 0 !important; width: 100% !important; max-width: 350px !important; margin-left: 395px !important; background: #F5F5F5 !important; border-radius: 0 !important; box-shadow: none !important; padding: 25px !important; border: 1px solid #F5F5F5 !important; flex-shrink: 0 !important; font-family: Arial, sans-serif !important;';
                 
                 const totalsTable = totals.querySelector('table');
                 if (totalsTable) {
@@ -348,6 +407,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 const elements = clonedInvoice.querySelectorAll(selector);
                 elements.forEach(el => {
                     el.style.cssText += styles;
+                    // Ensure RoxboroughCF font is specifically applied to header elements
+                    if (selector.includes('logo') || selector.includes('invoice-title')) {
+                        el.style.fontFamily = '"RoxboroughCF", "Times New Roman", Georgia, serif';
+                        el.style.fontWeight = 'bold';
+                        el.style.textRendering = 'optimizeLegibility';
+                        el.style.webkitFontSmoothing = 'antialiased';
+                    }
                 });
             });
 
@@ -410,6 +476,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     downloadPDF.disabled = false;
                 });
             }, 500); // Increased timeout for better rendering
+            }); // Close the ensureFontsLoaded promise
         });
     }
 

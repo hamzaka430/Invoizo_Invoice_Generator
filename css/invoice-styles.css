@@ -512,7 +512,7 @@
     margin: 30px 0;
     width: 100%;
     max-width: 350px;
-    margin-left: auto;
+    margin-left: 395px;
     background: #F5F5F5;
     border-radius: 0;
     box-shadow: none;
@@ -526,6 +526,27 @@
     width: 100%;
     border-collapse: collapse;
     background: #F5F5F5;
+}
+
+/* Responsive design for totals margin - maintain mobile compatibility */
+@media (max-width: 1200px) {
+    .invoice-preview .totals {
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .invoice-preview .totals {
+        margin-left: 0;
+        max-width: 100%;
+    }
+}
+
+/* Desktop and large screens: use the fixed margin */
+@media (min-width: 1201px) {
+    .invoice-preview .totals {
+        margin-left: 395px;
+    }
 }
 
 .invoice-preview .totals tr {

@@ -105,6 +105,7 @@
     <!-- Preload main stylesheet for faster rendering -->
     <link rel="preload" href="css/style.css" as="style">
     <link rel="preload" href="css/invoice-styles.css" as="style">
+    <link rel="preload" href="css/invoice-print.css" as="style">
     <link rel="preload" href="js/lazy-loading.js" as="script">
     
     <!-- Preload Custom Fonts -->
@@ -425,21 +426,21 @@
                             </tbody>
                         </table>
 
-                        <div class="totals">
+                        <div class="totals" >
                             <table>
-                                <tr>
+                                <tbody><tr>
                                     <td>Subtotal</td>
-                                    <td id="preview_subtotal">$500</td>
+                                    <td id="preview_subtotal">$0.00</td>
                                 </tr>
                                 <tr>
                                     <td>Tax (<span id="preview_tax_rate">0</span>%)</td>
-                                    <td id="preview_tax_amount">$0</td>
+                                    <td id="preview_tax_amount">$0.00</td>
                                 </tr>
                                 <tr class="total-row">
                                     <td>Total</td>
-                                    <td id="preview_total_amount">$500</td>
+                                    <td id="preview_total_amount">$0.00</td>
                                 </tr>
-                            </table>
+                            </tbody></table>
                         </div>
 
                         <div class="payment-info">
@@ -456,7 +457,7 @@
                             </div>
                         </div>
 
-                        <div class="thank-you">Thank you!</div>
+                        <!-- <div class="thank-you"                         style="font-family: RoxboroughCF;">Thank you</div> -->
 
                     </div>
                     
