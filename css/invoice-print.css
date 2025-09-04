@@ -1,0 +1,418 @@
+/* invoice-print.css: Fixed desktop/A4 layout for invoice PDF/print (no responsive or mobile styles) */
+
+/* Import fonts for PDF rendering */
+@import url('../css/invoice-styles.css');
+
+@page {
+  size: A4;
+  margin: 0;
+  background: #f5f5f5;
+}
+
+html, body {
+  background: #f5f5f5 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 297mm !important;
+}
+
+/* Ensure full page coverage */
+html::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f5f5f5;
+  z-index: -1;
+}
+
+.invoice-preview {
+  background: #f5f5f5 !important;
+  min-height: 297mm !important;
+  width: 100% !important;
+  display: block !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.invoice-document {
+  width: 210mm !important;
+  height: 297mm !important;
+  min-height: 297mm !important;
+  margin: 0 auto !important;
+  background: #f5f5f5 !important;
+  padding: 40px !important;
+  font-family: 'Arial', sans-serif !important;
+  color: #000 !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+}
+.invoice-header-doc {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 60px !important;
+  border-bottom: none !important;
+  margin-top: 45px !important;
+  flex-shrink: 0 !important;
+}
+
+.logo, .invoice-title {
+  font-size: 2.5rem !important;
+  font-weight: bold !important;
+  color: #000 !important;
+  letter-spacing: 3px !important;
+  text-transform: uppercase !important;
+  font-family: 'RoxboroughCF', 'Times New Roman', 'Georgia', serif !important;
+}
+
+.invoice-info-section {
+  display: flex !important;
+  justify-content: space-between !important;
+  margin-bottom: 50px !important;
+  align-items: flex-start !important;
+  flex-shrink: 0 !important;
+}
+
+.bill-to { 
+  flex: 1 !important; 
+}
+
+.bill-to h4 {
+  font-size: 1rem !important;
+  font-weight: bold !important;
+  margin-bottom: 15px !important;
+  color: #000 !important;
+  text-transform: uppercase !important;
+}
+
+.bill-to p {
+  margin: 5px 0 !important;
+  color: #000 !important;
+  line-height: 1.4 !important;
+  font-size: 1rem !important;
+}
+
+.invoice-details {
+  text-align: right !important;
+  flex: 1 !important;
+}
+
+.invoice-details p {
+  margin: 5px 0 !important;
+  color: #000 !important;
+  font-size: 1rem !important;
+}
+.items-table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin-bottom: 30px !important;
+  background: #F5F5F5 !important;
+  flex-shrink: 0 !important;
+}
+
+.items-table th {
+  padding: 15px 10px !important;
+  text-align: left !important;
+  font-weight: bold !important;
+  font-size: 1rem !important;
+  color: #000 !important;
+  border-bottom: 2px solid #000 !important;
+  background: #F5F5F5 !important;
+}
+
+.items-table th:nth-child(2),
+.items-table th:nth-child(3),
+.items-table th:nth-child(4) {
+  text-align: right !important;
+}
+
+.items-table td {
+  padding: 15px 10px !important;
+  border-bottom: 1px solid #ddd !important;
+  font-size: 1rem !important;
+  color: #000 !important;
+  background: #F5F5F5 !important;
+}
+
+.items-table td:nth-child(2),
+.items-table td:nth-child(3),
+.items-table td:nth-child(4) {
+  text-align: right !important;
+}
+
+.totals {
+  margin: 30px 0 !important;
+  width: 100% !important;
+  max-width: 350px !important;
+  margin-left: auto !important;
+  background: #F5F5F5 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 25px !important;
+  border: 1px solid #F5F5F5 !important;
+  flex-shrink: 0 !important;
+  font-family: 'Arial', sans-serif !important;
+}
+
+.totals table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  background: #F5F5F5 !important;
+}
+
+.totals tr {
+  background: #F5F5F5 !important;
+}
+
+.totals td {
+  font-size: 1rem !important;
+  padding: 8px 0 !important;
+  color: #000 !important;
+  border: none !important;
+  background: #F5F5F5 !important;
+  font-family: 'Arial', sans-serif !important;
+  line-height: 1.4 !important;
+}
+
+.totals td:first-child {
+  text-align: left !important;
+  font-weight: normal !important;
+}
+
+.totals td:last-child {
+  text-align: right !important;
+  font-weight: bold !important;
+}
+
+.totals .total-row {
+  background: #F5F5F5 !important;
+}
+
+.totals .total-row td {
+  font-weight: bold !important;
+  font-size: 1.2rem !important;
+  color: #000 !important;
+  border-top: 2px solid #000 !important;
+  padding-top: 15px !important;
+  margin-top: 10px !important;
+  background: #F5F5F5 !important;
+  font-family: 'Arial', sans-serif !important;
+}
+
+.totals .total-row td:first-child {
+  font-weight: bold !important;
+}
+
+.totals .total-row td:last-child {
+  font-weight: bold !important;
+  text-align: right !important;
+}
+.thank-you {
+  font-size: 1.5rem !important;
+  margin: 40px 0 !important;
+  color: #000 !important;
+  text-align: center !important;
+  flex-shrink: 0 !important;
+}
+
+.payment-info {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  margin-top: 40px !important;
+  flex-shrink: 0 !important;
+}
+
+.payment-details { 
+  flex: 1 !important; 
+}
+
+.payment-details h4 {
+  font-size: 1rem !important;
+  font-weight: bold !important;
+  margin-bottom: 15px !important;
+  color: #000 !important;
+  text-transform: uppercase !important;
+}
+
+.payment-details p {
+  margin: 5px 0 !important;
+  color: #000 !important;
+  font-size: 1rem !important;
+  line-height: 1.4 !important;
+}
+
+.company-info {
+  text-align: right !important;
+  flex: 1 !important;
+}
+
+.company-name {
+  margin-top: 75px !important;
+  font-size: 1.8rem !important;
+  font-weight: bold !important;
+  color: #000 !important;
+  font-family: 'RoxboroughCF', 'Times New Roman', 'Georgia', serif !important;
+}
+
+.company-address {
+  color: #000 !important;
+  font-size: 1rem !important;
+}
+
+/* Flexible spacer to push content to fill page height */
+.invoice-document::after {
+  content: '';
+  flex: 1;
+  min-height: 20px;
+}
+
+/* Hide preview actions in print */
+.preview-actions {
+  display: none !important;
+}
+
+/* Media queries for different print scenarios */
+@media print {
+  html, body {
+    background: #f5f5f5 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  .invoice-preview {
+    background: #f5f5f5 !important;
+    min-height: 297mm !important;
+    width: 100% !important;
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  .invoice-document {
+    width: 210mm !important;
+    height: 297mm !important;
+    min-height: 297mm !important;
+    margin: 0 !important;
+    background: #f5f5f5 !important;
+    padding: 40px !important;
+    box-sizing: border-box !important;
+    page-break-inside: avoid !important;
+    page-break-after: avoid !important;
+    page-break-before: avoid !important;
+  }
+  
+  .preview-actions {
+    display: none !important;
+  }
+  
+  /* Ensure colors are preserved in print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
+/* Additional fallback font declarations */
+.logo, .invoice-title, .company-name {
+  font-family: 'RoxboroughCF', 'Times New Roman', 'Georgia', serif !important;
+}
+
+/* Force exact positioning for critical elements */
+@media screen, print {
+  .invoice-document .totals {
+    position: relative !important;
+    margin-left: auto !important;
+    width: 350px !important;
+  }
+  
+  .invoice-document .company-info {
+    text-align: right !important;
+  }
+  
+  .invoice-document .bill-to {
+    text-align: left !important;
+  }
+}
+
+/* Ensure consistent totals rendering across all scenarios */
+.totals, .invoice-preview .totals, .invoice-document .totals {
+  margin: 30px 0 !important;
+  width: 100% !important;
+  max-width: 350px !important;
+  margin-left: auto !important;
+  background: #F5F5F5 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 25px !important;
+  border: 1px solid #F5F5F5 !important;
+  flex-shrink: 0 !important;
+  font-family: 'Arial', sans-serif !important;
+}
+
+.totals table, .invoice-preview .totals table, .invoice-document .totals table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  background: #F5F5F5 !important;
+}
+
+.totals tr, .invoice-preview .totals tr, .invoice-document .totals tr {
+  background: #F5F5F5 !important;
+}
+
+.totals td, .invoice-preview .totals td, .invoice-document .totals td {
+  font-size: 1rem !important;
+  padding: 8px 0 !important;
+  color: #000 !important;
+  border: none !important;
+  background: #F5F5F5 !important;
+  font-family: 'Arial', sans-serif !important;
+  line-height: 1.4 !important;
+}
+
+.totals td:first-child, .invoice-preview .totals td:first-child, .invoice-document .totals td:first-child {
+  text-align: left !important;
+  font-weight: normal !important;
+}
+
+.totals td:last-child, .invoice-preview .totals td:last-child, .invoice-document .totals td:last-child {
+  text-align: right !important;
+  font-weight: bold !important;
+}
+
+.totals .total-row, .invoice-preview .totals .total-row, .invoice-document .totals .total-row {
+  background: #F5F5F5 !important;
+}
+
+.totals .total-row td, .invoice-preview .totals .total-row td, .invoice-document .totals .total-row td {
+  font-weight: bold !important;
+  font-size: 1.2rem !important;
+  color: #000 !important;
+  border-top: 2px solid #000 !important;
+  padding-top: 15px !important;
+  margin-top: 10px !important;
+  background: #F5F5F5 !important;
+  font-family: 'Arial', sans-serif !important;
+}
+
+.totals .total-row td:first-child, .invoice-preview .totals .total-row td:first-child, .invoice-document .totals .total-row td:first-child {
+  font-weight: bold !important;
+  text-align: left !important;
+}
+
+.totals .total-row td:last-child, .invoice-preview .totals .total-row td:last-child, .invoice-document .totals .total-row td:last-child {
+  font-weight: bold !important;
+  text-align: right !important;
+}

@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // FIXED - Update preview with form data to match your template design
     function updatePreview() {
         // Company and invoice details
-        const companyName = document.getElementById('company_name').value || 'COMAPNY';
+        const companyName = document.getElementById('company_name').value || 'DEZIGNWISE';
         const invoiceNo = document.getElementById('invoice_no').value || '01';
         
         document.getElementById('preview_company_name').textContent = companyName;
@@ -227,205 +227,195 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // FIXED - Download PDF functionality for single page printing
+    // ENHANCED - Download PDF functionality with jsPDF and html2canvas
     if (downloadPDF) {
         downloadPDF.addEventListener('click', function() {
-            // Ensure only invoice document is visible
             const invoiceDocument = document.querySelector('.invoice-document');
             if (!invoiceDocument) {
                 alert('Please generate the invoice preview first!');
                 return;
             }
 
-            // Hide all other elements
-            const bodyChildren = document.body.children;
-            const originalDisplay = [];
-            
-            // Store original display values and hide everything
-            for (let i = 0; i < bodyChildren.length; i++) {
-                originalDisplay.push(bodyChildren[i].style.display);
-                bodyChildren[i].style.display = 'none';
-            }
-            
-            // Show only the invoice preview
-            const invoicePreviewElement = document.getElementById('invoicePreview');
-            if (invoicePreviewElement) {
-                invoicePreviewElement.style.display = 'block';
-            }
+            downloadPDF.textContent = 'Generating PDF...';
+            downloadPDF.disabled = true;
 
-            // Force layout recalculation
-            document.body.offsetHeight;
+            // Create a dedicated print container with full A4 dimensions
+            const printContainer = document.createElement('div');
+            printContainer.style.cssText = `
+                position: fixed;
+                top: -10000px;
+                left: -10000px;
+                width: 210mm;
+                height: 297mm;
+                background: #f5f5f5;
+                z-index: -1000;
+                font-family: Arial, sans-serif;
+                color: #000;
+                box-sizing: border-box;
+            `;
+
+            // Create a wrapper for the full page background
+            const pageWrapper = document.createElement('div');
+            pageWrapper.style.cssText = `
+                width: 210mm;
+                height: 297mm;
+                background: #f5f5f5;
+                position: relative;
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            `;
+
+            // Clone the invoice content
+            const clonedInvoice = invoiceDocument.cloneNode(true);
             
-            // Print with a slight delay to ensure proper rendering
-            setTimeout(() => {
-                window.print();
+            // Apply print-specific styles to the cloned content
+            clonedInvoice.style.cssText = `
+                width: 210mm !important;
+                height: 297mm !important;
+                background: #f5f5f5 !important;
+                padding: 40px !important;
+                margin: 0 !important;
+                box-sizing: border-box !important;
+                font-family: Arial, sans-serif !important;
+                color: #000 !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: flex-start !important;
+                position: relative !important;
+            `;
+
+            // Remove any unwanted elements (like preview actions)
+            const actionsToRemove = clonedInvoice.querySelectorAll('.preview-actions');
+            actionsToRemove.forEach(action => action.remove());
+
+            // Apply critical styles to ensure proper rendering
+            const elementsToStyle = [
+                { selector: '.invoice-header-doc', styles: 'display: flex !important; justify-content: space-between !important; align-items: center !important; margin-bottom: 60px !important; margin-top: 45px !important; flex-shrink: 0 !important;' },
+                { selector: '.logo, .invoice-title', styles: 'font-size: 2.5rem !important; font-weight: bold !important; color: #000 !important; letter-spacing: 3px !important; text-transform: uppercase !important; font-family: "Times New Roman", Georgia, serif !important;' },
+                { selector: '.invoice-info-section', styles: 'display: flex !important; justify-content: space-between !important; margin-bottom: 50px !important; align-items: flex-start !important; flex-shrink: 0 !important;' },
+                { selector: '.items-table', styles: 'width: 100% !important; border-collapse: collapse !important; margin-bottom: 30px !important; background: #F5F5F5 !important; flex-shrink: 0 !important;' },
+                { selector: '.payment-info', styles: 'display: flex !important; justify-content: space-between !important; align-items: flex-start !important; margin-top: 40px !important; flex-shrink: 0 !important;' },
+                { selector: '.thank-you', styles: 'font-size: 1.5rem !important; margin: 40px 0 !important; color: #000 !important; text-align: center !important; flex-shrink: 0 !important;' }
+            ];
+
+            // Special handling for totals section to ensure exact match
+            const totalsElements = clonedInvoice.querySelectorAll('.totals');
+            totalsElements.forEach(totals => {
+                totals.style.cssText = 'margin: 30px 0 !important; width: 100% !important; max-width: 350px !important; margin-left: auto !important; background: #F5F5F5 !important; border-radius: 0 !important; box-shadow: none !important; padding: 25px !important; border: 1px solid #F5F5F5 !important; flex-shrink: 0 !important; font-family: Arial, sans-serif !important;';
                 
-                // Restore original display values after printing
-                setTimeout(() => {
-                    for (let i = 0; i < bodyChildren.length; i++) {
-                        bodyChildren[i].style.display = originalDisplay[i];
+                const totalsTable = totals.querySelector('table');
+                if (totalsTable) {
+                    totalsTable.style.cssText = 'width: 100% !important; border-collapse: collapse !important; background: #F5F5F5 !important;';
+                }
+                
+                // Style all table rows
+                const totalsRows = totals.querySelectorAll('tr');
+                totalsRows.forEach(tr => {
+                    tr.style.cssText = 'background: #F5F5F5 !important;';
+                });
+                
+                const totalsTds = totals.querySelectorAll('td');
+                totalsTds.forEach(td => {
+                    td.style.cssText = 'font-size: 1rem !important; padding: 8px 0 !important; color: #000 !important; border: none !important; background: #F5F5F5 !important; font-family: Arial, sans-serif !important; line-height: 1.4 !important;';
+                    
+                    // Check if this is the last child (right column)
+                    if (td.parentNode.lastElementChild === td) {
+                        td.style.cssText += 'text-align: right !important; font-weight: bold !important;';
+                    } else {
+                        td.style.cssText += 'text-align: left !important; font-weight: normal !important;';
                     }
-                }, 500);
-            }, 200);
+                });
+                
+                const totalRows = totals.querySelectorAll('.total-row');
+                totalRows.forEach(row => {
+                    row.style.cssText = 'background: #F5F5F5 !important;';
+                });
+                
+                const totalRowTds = totals.querySelectorAll('.total-row td');
+                totalRowTds.forEach(td => {
+                    td.style.cssText = 'font-weight: bold !important; font-size: 1.2rem !important; color: #000 !important; border-top: 2px solid #000 !important; padding-top: 15px !important; margin-top: 10px !important; background: #F5F5F5 !important; font-family: Arial, sans-serif !important; line-height: 1.4 !important;';
+                    
+                    if (td.parentNode.lastElementChild === td) {
+                        td.style.cssText += 'text-align: right !important; font-weight: bold !important;';
+                    } else {
+                        td.style.cssText += 'text-align: left !important; font-weight: bold !important;';
+                    }
+                });
+            });
+
+            elementsToStyle.forEach(({ selector, styles }) => {
+                const elements = clonedInvoice.querySelectorAll(selector);
+                elements.forEach(el => {
+                    el.style.cssText += styles;
+                });
+            });
+
+            // Add a spacer element to fill remaining height
+            const spacer = document.createElement('div');
+            spacer.style.cssText = 'flex: 1; min-height: 20px; background: #f5f5f5;';
+            clonedInvoice.appendChild(spacer);
+
+            pageWrapper.appendChild(clonedInvoice);
+            printContainer.appendChild(pageWrapper);
+            document.body.appendChild(printContainer);
+
+            // Wait for layout to settle, then capture
+            setTimeout(() => {
+                html2canvas(pageWrapper, {
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: false,
+                    backgroundColor: '#f5f5f5',
+                    width: Math.round(210 * 3.7795275591), // 210mm in pixels at 96dpi
+                    height: Math.round(297 * 3.7795275591), // 297mm in pixels at 96dpi
+                    scrollX: 0,
+                    scrollY: 0,
+                    windowWidth: Math.round(210 * 3.7795275591),
+                    windowHeight: Math.round(297 * 3.7795275591)
+                }).then(function(canvas) {
+                    // Clean up
+                    document.body.removeChild(printContainer);
+                    
+                    // Create PDF with exact A4 dimensions
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF('p', 'mm', 'a4');
+                    
+                    // Add the image to fill the entire A4 page
+                    const imgData = canvas.toDataURL('image/png');
+                    pdf.addImage(imgData, 'PNG', 0, 0, 210, 297);
+                    
+                    // Generate filename and save
+                    const invoiceNumber = document.getElementById('invoice_number')?.value || 'INV-' + Date.now();
+                    const filename = `Invoice_${invoiceNumber.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`;
+                    pdf.save(filename);
+                    
+                    // Reset button
+                    downloadPDF.textContent = 'Download PDF';
+                    downloadPDF.disabled = false;
+                }).catch(function(error) {
+                    console.error('Error generating PDF:', error);
+                    
+                    // Clean up on error
+                    if (document.body.contains(printContainer)) {
+                        document.body.removeChild(printContainer);
+                    }
+                    
+                    // Fallback to print
+                    alert('PDF generation failed. Opening print dialog instead.');
+                    window.print();
+                    
+                    // Reset button
+                    downloadPDF.textContent = 'Download PDF';
+                    downloadPDF.disabled = false;
+                });
+            }, 500); // Increased timeout for better rendering
         });
     }
 
     // Initialize calculations
     calculateTotals();
 });
-
-// FIXED - Enhanced PDF Generation Function for single page
-function generateOptimizedPDF() {
-    const invoiceElement = document.querySelector('.invoice-document');
-    if (!invoiceElement) {
-        alert('Invoice not found! Please generate preview first.');
-        return;
-    }
-    
-    // Create a clean copy of the invoice
-    const clonedInvoice = invoiceElement.cloneNode(true);
-    
-    // Apply specific styles for print optimization
-    const printStyles = `
-        <style>
-            @page {
-                size: A4;
-                margin: 0.5in;
-            }
-            * {
-                box-sizing: border-box;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            body {
-                margin: 0;
-                padding: 20px;
-                font-family: Arial, sans-serif;
-                font-size: 12px;
-                line-height: 1.3;
-                background: #f5f5f5;
-            }
-            .invoice-document {
-                width: 100%;
-                max-width: none;
-                margin: 0;
-                padding: 20px;
-                background: #f5f5f5;
-                page-break-inside: avoid;
-            }
-            .invoice-header-doc {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 20px;
-                page-break-inside: avoid;
-            }
-            .logo, .invoice-title {
-                font-size: 2rem;
-                font-weight: bold;
-                letter-spacing: 2px;
-            }
-            .invoice-info-section {
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 20px;
-                page-break-inside: avoid;
-            }
-            .items-table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-bottom: 15px;
-                page-break-inside: avoid;
-            }
-            .items-table th,
-            .items-table td {
-                padding: 8px 5px;
-                font-size: 0.9rem;
-                border-bottom: 1px solid #ddd;
-            }
-            .items-table th {
-                border-bottom: 2px solid #000;
-                font-weight: bold;
-            }
-            .totals {
-                width: 250px;
-                margin: 15px auto;
-                padding: 15px;
-                background: white;
-                border: 1px solid #ddd;
-                border-radius: 5px;
-                page-break-inside: avoid;
-            }
-            .totals td {
-                padding: 4px 0;
-                font-size: 0.9rem;
-            }
-            .totals .total-row td {
-                font-weight: bold;
-                font-size: 1rem;
-                border-top: 2px solid #000;
-                padding-top: 8px;
-            }
-            .thank-you {
-                text-align: center;
-                font-size: 1.2rem;
-                margin: 15px 0;
-            }
-            .payment-info {
-                display: flex;
-                justify-content: space-between;
-                margin-top: 20px;
-                page-break-inside: avoid;
-            }
-            .payment-details h4,
-            .bill-to h4 {
-                font-size: 0.9rem;
-                margin-bottom: 8px;
-            }
-            .payment-details p,
-            .bill-to p,
-            .invoice-details p {
-                font-size: 0.85rem;
-                margin: 2px 0;
-                line-height: 1.2;
-            }
-            .company-name {
-                font-size: 1.4rem;
-                font-weight: bold;
-            }
-            .company-address {
-                font-size: 0.85rem;
-            }
-        </style>
-    `;
-    
-    // Create new window with optimized content
-    const printWindow = window.open('', '_blank', 'width=800,height=600');
-    printWindow.document.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>Invoice - ${document.getElementById('invoice_no')?.value || 'Invoice'}</title>
-            <meta charset="UTF-8">
-            ${printStyles}
-        </head>
-        <body>
-            ${clonedInvoice.outerHTML}
-        </body>
-        </html>
-    `);
-    
-    printWindow.document.close();
-    printWindow.focus();
-    
-    // Wait for content to load then print
-    setTimeout(() => {
-        printWindow.print();
-        setTimeout(() => {
-            printWindow.close();
-        }, 1000);
-    }, 500);
-}
 
 // Export functions for external use
 window.InvoiceGenerator = {
@@ -442,7 +432,10 @@ window.InvoiceGenerator = {
     },
     
     downloadOptimizedPDF: function() {
-        generateOptimizedPDF();
+        // Trigger the enhanced PDF download
+        const event = new Event('click');
+        const downloadBtn = document.getElementById('downloadPDF');
+        if (downloadBtn) downloadBtn.dispatchEvent(event);
     },
     
     resetForm: function() {

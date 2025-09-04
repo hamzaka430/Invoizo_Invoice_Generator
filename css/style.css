@@ -1,3 +1,28 @@
+/* Custom Font Declaration - RoxboroughCF Font Files */
+@font-face {
+    font-family: 'RoxboroughCF';
+    src: url('../fonts/fonnts.com-roxboroughcf-regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'RoxboroughCF';
+    src: url('../fonts/fonnts.com-roxboroughcf-bold.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'RoxboroughCF';
+    src: url('../fonts/fonnts.com-roxboroughcf-medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* Visually hidden class for accessibility */
 .visually-hidden {
     position: absolute !important;

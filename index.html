@@ -106,12 +106,20 @@
     <link rel="preload" href="css/style.css" as="style">
     <link rel="preload" href="css/invoice-styles.css" as="style">
     <link rel="preload" href="js/lazy-loading.js" as="script">
+    
+    <!-- Preload Custom Fonts -->
+    <link rel="preload" href="fonts/fonnts.com-roxboroughcf-regular.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="fonts/fonnts.com-roxboroughcf-bold.otf" as="font" type="font/otf" crossorigin>
+    
+    <!-- Custom Font for Invoice Headers -->
+    <link href="https://fonts.googleapis.com/css2?family=Roxborough:wght@400;700&display=swap" rel="stylesheet">
+    
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
 
     <!-- Main Stylesheets -->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/invoice-styles.css" rel="stylesheet">
+    <link href="css/style.css?v=2" rel="stylesheet">
+    <link href="css/invoice-styles.css?v=2" rel="stylesheet">
 
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
@@ -394,7 +402,7 @@
                             <div class="bill-to">
                                 <h4>BILLED TO:</h4>
                                 <p id="preview_client_name">Hamza Zaka</p>
-                                <p id="preview_client_phone">=92 332 3500430</p>
+                                <p id="preview_client_phone">+92 332 3500430</p>
                                 <p id="preview_client_address">123 Main St, Anytown, Karachi</p>
                             </div>
                             <div class="invoice-details">
@@ -697,6 +705,10 @@
         <p>© 2025 INVOIZO — Professional Invoice Generator by <a href="https://www.dezignwise.Online/" target="_blank" rel="nofollow noopener" style="color: #000; font-weight: 700;">DezignWise</a></p>
     </footer>
     <!-- JavaScript Files -->
+    <!-- PDF Generation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
     <!-- Defer JavaScript for faster page load -->
     <script src="js/lazy-loading.js" defer></script>
     <script src="js/script.js" defer></script>

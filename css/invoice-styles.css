@@ -1,3 +1,36 @@
+/* Custom Font Declaration - RoxboroughCF Font Files */
+@font-face {
+    font-family: 'RoxboroughCF';
+    src: url('../fonts/fonnts.com-roxboroughcf-regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'RoxboroughCF';
+    src: url('../fonts/fonnts.com-roxboroughcf-bold.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'RoxboroughCF';
+    src: url('../fonts/fonnts.com-roxboroughcf-medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'RoxboroughCF';
+    src: url('../fonts/fonnts.com-roxboroughcf-light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
 @media (max-width: 600px) {
     .invoice-preview .totals {
         max-width: 100%;
@@ -183,7 +216,7 @@
 
 .remove-item {
     background: #666;
-    color: white;
+    color: #F5F5F5;
     border: none;
     width: 40px;
     height: 40px;
@@ -201,7 +234,7 @@
 
 .add-item-btn {
     background: #000;
-    color: white;
+    color: #F5F5F5;
     border: 2px solid #000;
     padding: 15px 30px;
     cursor: pointer;
@@ -342,22 +375,25 @@
 }
 
 .invoice-document {
-    max-width: 800px;
-    margin: 0 auto;
-    background: #f5f5f5;
-    padding: 40px;
-    font-family: 'Arial', sans-serif;
-    color: #000;
-    min-height: auto;
-}
-
-/* FIXED - Invoice Header to match your template */
+  max-width: 800px;
+  margin: 0 auto;
+  background: #f5f5f5;
+  padding: 40px;
+  font-family: 'Arial', sans-serif;
+  color: #000;
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}/* Invoice Header to match your template */
 .invoice-header-doc {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 60px;
     border-bottom: none;
+    margin-top: 45px;
+    flex-shrink: 0;
 }
 
 .logo {
@@ -366,6 +402,7 @@
     color: #000;
     letter-spacing: 3px;
     text-transform: uppercase;
+    font-family: 'RoxboroughCF', 'Times New Roman', 'Georgia', serif !important;
 }
 
 .invoice-title {
@@ -374,6 +411,23 @@
     color: #000;
     letter-spacing: 3px;
     text-transform: uppercase;
+    font-family: 'RoxboroughCF', 'Times New Roman', 'Georgia', serif !important;
+}
+
+/* Additional selectors to ensure font applies */
+#preview_company_name {
+    font-family: 'RoxboroughCF', 'Times New Roman', 'Georgia', serif !important;
+    font-weight: bold !important;
+}
+
+.invoice-document .logo {
+    font-family: 'RoxboroughCF', 'Times New Roman', 'Georgia', serif !important;
+    font-weight: bold !important;
+}
+
+.invoice-document .invoice-title {
+    font-family: 'RoxboroughCF', 'Times New Roman', 'Georgia', serif !important;
+    font-weight: bold !important;
 }
 
 .invoice-info-section {
@@ -381,6 +435,7 @@
     justify-content: space-between;
     margin-bottom: 50px;
     align-items: flex-start;
+    flex-shrink: 0;
 }
 
 .bill-to {
@@ -413,12 +468,13 @@
     font-size: 1rem;
 }
 
-/* FIXED - Items Table */
+/* Items Table */
 .items-table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 30px;
-    background: white;
+    background: #F5F5F5;
+    flex-shrink: 0;
 }
 
 .items-table th {
@@ -428,7 +484,7 @@
     font-size: 1rem;
     color: #000;
     border-bottom: 2px solid #000;
-    background: white;
+    background: #F5F5F5;
 }
 
 .items-table th:nth-child(2),
@@ -442,7 +498,7 @@
     border-bottom: 1px solid #ddd;
     font-size: 1rem;
     color: #000;
-    background: white;
+    background: #F5F5F5;
 }
 
 .items-table td:nth-child(2),
@@ -451,22 +507,29 @@
     text-align: right;
 }
 
-/* FIXED - Totals Section to match your template */
+/* Totals Section to match your template */
 .invoice-preview .totals {
     margin: 30px 0;
     width: 100%;
     max-width: 350px;
     margin-left: auto;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background: #F5F5F5;
+    border-radius: 0;
+    box-shadow: none;
     padding: 25px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #F5F5F5;
+    flex-shrink: 0;
+    font-family: 'Arial', sans-serif;
 }
 
 .invoice-preview .totals table {
     width: 100%;
     border-collapse: collapse;
+    background: #F5F5F5;
+}
+
+.invoice-preview .totals tr {
+    background: #F5F5F5;
 }
 
 .invoice-preview .totals td {
@@ -474,11 +537,23 @@
     padding: 8px 0;
     color: #000;
     border: none;
+    background: #F5F5F5;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.4;
+}
+
+.invoice-preview .totals td:first-child {
+    text-align: left;
+    font-weight: normal;
 }
 
 .invoice-preview .totals td:last-child {
     text-align: right;
     font-weight: bold;
+}
+
+.invoice-preview .totals .total-row {
+    background: #F5F5F5;
 }
 
 .invoice-preview .totals .total-row td {
@@ -488,6 +563,17 @@
     border-top: 2px solid #000;
     padding-top: 15px;
     margin-top: 10px;
+    background: #F5F5F5;
+    font-family: 'Arial', sans-serif;
+}
+
+.invoice-preview .totals .total-row td:first-child {
+    font-weight: bold;
+}
+
+.invoice-preview .totals .total-row td:last-child {
+    font-weight: bold;
+    text-align: right;
 }
 
 .thank-you {
@@ -495,6 +581,7 @@
     margin: 40px 0;
     color: #000;
     text-align: center;
+    flex-shrink: 0;
 }
 
 /* FIXED - Payment Info Section */
@@ -503,6 +590,7 @@
     justify-content: space-between;
     align-items: flex-start;
     margin-top: 40px;
+    flex-shrink: 0;
 }
 
 .payment-details {
@@ -530,10 +618,12 @@
 }
 
 .company-name {
+    margin-top: 75px;
     font-size: 1.8rem;
     font-weight: bold;
     color: #000;
-    margin-bottom: 5px;
+    font-family: 'RoxboroughCF', 'Times New Roman', 'Georgia', serif !important;
+    /* margin-bottom: 5px; */
 }
 
 .company-address {
@@ -547,7 +637,13 @@
     gap: 20px;
     justify-content: center;
     background: white;
-    border-top: 1px solid #eee;
+}
+
+/* Flexible spacer for consistent layout */
+.invoice-document::after {
+    content: '';
+    flex: 1;
+    min-height: 20px;
 }
 
 /* Responsive Design */
@@ -654,7 +750,7 @@
     body {
         margin: 0 !important;
         padding: 0 !important;
-        background: white !important;
+        background: #F5F5F5 !important;
         font-family: 'Arial', sans-serif !important;
     }
     
@@ -766,7 +862,7 @@
     
     .thank-you {
         font-size: 1.2rem !important;
-        margin: 15px 0 20px 0 !important;
+        margin: 1px 0 10px 0 !important;
     }
     
     .payment-info {
@@ -775,7 +871,7 @@
     
     .company-name {
         font-size: 1.4rem !important;
-        margin-bottom: 3px !important;
+        /* margin-bottom: 3px !important; */
     }
     
     .company-address {
