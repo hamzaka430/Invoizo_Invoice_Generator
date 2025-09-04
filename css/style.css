@@ -303,11 +303,11 @@
 
         /* Section 1: Hero */
         .hero {
-            min-height: 100vh;
+            min-height: 90vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 80px 20px;
+            padding: 70px 20px;
             position: relative;
             overflow: hidden;
         }
