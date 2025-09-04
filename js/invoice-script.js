@@ -118,12 +118,24 @@ document.addEventListener('DOMContentLoaded', function() {
         taxInput.addEventListener('input', calculateTotals);
     }
 
+    // Function to scroll to invoice section
+    function scrollToInvoice() {
+        const invoiceSection = document.getElementById('invoice');
+        if (invoiceSection) {
+            invoiceSection.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        }
+    }
+
     // Preview functionality
     if (previewBtn) {
         previewBtn.addEventListener('click', function() {
             updatePreview();
             if (formWrapper) formWrapper.style.display = 'none';
             if (invoicePreview) invoicePreview.style.display = 'block';
+            scrollToInvoice();
         });
     }
 
@@ -139,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function updatePreview() {
         // Company and invoice details
         const companyName = document.getElementById('company_name').value || 'DEZIGNWISE';
-        const invoiceNo = document.getElementById('invoice_no').value || '01';
+        const invoiceNo = document.getElementById('invoice_no').value || 'INV-02';
         
         document.getElementById('preview_company_name').textContent = companyName;
         document.getElementById('preview_invoice_no').textContent = invoiceNo;
@@ -147,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Company address
         document.getElementById('preview_company_address').textContent = 
-            document.getElementById('company_address').value || '123 Anywhere St., Any City, ST 12345';
+            document.getElementById('company_address').value || '123 Anywhere St., Karachi, Pakistan.';
         
         // FIXED - Date formatting to match your template
         const invoiceDate = document.getElementById('invoice_date').value;
@@ -159,11 +171,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Client details
         document.getElementById('preview_client_name').textContent = 
-            document.getElementById('client_name').value || 'John Doe';
+            document.getElementById('client_name').value || 'Hamza Zaka';
         document.getElementById('preview_client_phone').textContent = 
             document.getElementById('client_phone').value || '+123-456-7890';
         document.getElementById('preview_client_address').textContent = 
-            document.getElementById('client_address').value || '63 Ivy Road, Hawkville, GA, USA 31036';
+            document.getElementById('client_address').value || '123 Anywhere St., Karachi, Pakistan.';
 
         // FIXED - Items rendering
         const itemsContainer = document.getElementById('preview_items');
@@ -202,9 +214,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Payment info
         document.getElementById('preview_bank_name').textContent = 
-            document.getElementById('bank_name').value || 'Briard Bank';
+            document.getElementById('bank_name').value || 'Meezan Bank';
         document.getElementById('preview_account_name').textContent = 
-            document.getElementById('account_name').value || 'John Doe';
+            document.getElementById('account_name').value || 'Hamza Zaka';
         document.getElementById('preview_account_no').textContent = 
             document.getElementById('account_no').value || '123-456-7890';
         
@@ -224,6 +236,7 @@ document.addEventListener('DOMContentLoaded', function() {
             updatePreview();
             if (formWrapper) formWrapper.style.display = 'none';
             if (invoicePreview) invoicePreview.style.display = 'block';
+            scrollToInvoice();
         });
     }
 
