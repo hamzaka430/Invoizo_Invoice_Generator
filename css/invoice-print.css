@@ -1,5 +1,17 @@
 /* invoice-print.css: Fixed desktop/A4 layout for invoice PDF/print (no responsive or mobile styles) */
 
+/* Color Theme Variables */
+:root {
+    --primary-orange: #f27232;
+    --secondary-purple: #d2bce7;
+    --accent-green: #b2ef43;
+    --dark-gray: #121212;
+    --white: #ffffff;
+    --light-gray: #f8f9fa;
+    --text-dark: #121212;
+    --text-light: #666666;
+}
+
 /* Font declarations for PDF rendering - Direct embedding for better compatibility */
 @font-face {
     font-family: 'RoxboroughCF';
@@ -45,7 +57,7 @@ body::before {
 @page {
   size: A4;
   margin: 0;
-  background: #f5f5f5;
+  background: var(--light-gray);
 }
 
 html, body {
