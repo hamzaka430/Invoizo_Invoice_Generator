@@ -431,6 +431,7 @@
             animation: fadeInUp 1s ease;
             position: relative;
             z-index: 2;
+            margin-top: 130px;
         }
 
         /* Animations */
