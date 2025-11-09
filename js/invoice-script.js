@@ -8,8 +8,45 @@ document.addEventListener('DOMContentLoaded', function() {
     const formWrapper = document.querySelector('.invoice-form-wrapper');
     const addItemBtn = document.getElementById('addItem');
     const itemsList = document.getElementById('itemsList');
+    const currencySelect = document.getElementById('currency');
 
     if (!invoiceForm) return; // Exit if invoice form doesn't exist
+
+    // Currency symbols mapping
+    const currencySymbols = {
+        'USD': '$',
+        'EUR': '€',
+        'GBP': '£',
+        'PKR': '₨',
+        'INR': '₹',
+        'AED': 'د.إ',
+        'SAR': '﷼',
+        'CAD': 'C$',
+        'AUD': 'A$',
+        'JPY': '¥',
+        'CNY': '¥',
+        'CHF': 'CHF'
+    };
+
+    // Get current currency symbol
+    function getCurrencySymbol() {
+        const selectedCurrency = currencySelect ? currencySelect.value : 'USD';
+        return currencySymbols[selectedCurrency] || '$';
+    }
+
+    // Format amount with currency
+    function formatCurrency(amount) {
+        const symbol = getCurrencySymbol();
+        const formattedAmount = parseFloat(amount).toFixed(2);
+        return symbol + formattedAmount;
+    }
+
+    // Update all currency displays when currency changes
+    if (currencySelect) {
+        currencySelect.addEventListener('change', function() {
+            calculateTotals();
+        });
+    }
 
     // Set current date as default
     const today = new Date().toISOString().split('T')[0];
@@ -76,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const qty = parseFloat(qtyInput.value) || 0;
             const price = parseFloat(priceInput.value) || 0;
             const total = qty * price;
-            totalInput.value = '$' + total.toFixed(2);
+            totalInput.value = formatCurrency(total);
             calculateTotals();
         }
 
@@ -91,15 +128,19 @@ document.addEventListener('DOMContentLoaded', function() {
     function calculateTotals() {
         const itemTotals = document.querySelectorAll('input[name="item_total[]"]');
         let subtotal = 0;
+        const symbol = getCurrencySymbol();
 
         itemTotals.forEach(input => {
-            const value = input.value.replace('$', '');
+            // Extract numeric value by removing any currency symbols
+            let value = input.value;
+            // Remove all currency symbols and non-numeric characters except decimal point and minus
+            value = value.replace(/[^\d.-]/g, '');
             subtotal += parseFloat(value) || 0;
         });
 
         const subtotalInput = document.getElementById('subtotal');
         if (subtotalInput) {
-            subtotalInput.value = '$' + subtotal.toFixed(2);
+            subtotalInput.value = formatCurrency(subtotal);
         }
 
         const taxRate = parseFloat(document.getElementById('tax').value) || 0;
@@ -108,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const totalInput = document.getElementById('total_amount');
         if (totalInput) {
-            totalInput.value = '$' + totalAmount.toFixed(2);
+            totalInput.value = formatCurrency(totalAmount);
         }
     }
 
@@ -149,6 +190,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // FIXED - Update preview with form data to match your template design
     function updatePreview() {
+        // Get currency symbol
+        const currencySymbol = getCurrencySymbol();
+        
         // Company and invoice details
         const companyName = document.getElementById('company_name').value || 'DEZIGNWISE';
         const invoiceNo = document.getElementById('invoice_no').value || 'INV-02';
@@ -193,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 itemRow.innerHTML = `
                     <td>${name}</td>
                     <td>${qty}</td>
-                    <td>$${parseFloat(price).toFixed(2)}</td>
+                    <td>${currencySymbol}${parseFloat(price).toFixed(2)}</td>
                     <td>${total}</td>
                 `;
                 itemsContainer.appendChild(itemRow);
@@ -204,12 +248,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const subtotal = document.getElementById('subtotal').value;
         const tax = document.getElementById('tax').value || 0;
         const totalAmount = document.getElementById('total_amount').value;
-        const subtotalValue = parseFloat(subtotal.replace('$', '')) || 0;
+        
+        // Extract numeric value from subtotal
+        let subtotalValue = subtotal.replace(/[^\d.-]/g, '');
+        subtotalValue = parseFloat(subtotalValue) || 0;
         const taxAmount = (subtotalValue * parseFloat(tax)) / 100;
 
         document.getElementById('preview_subtotal').textContent = subtotal;
         document.getElementById('preview_tax_rate').textContent = tax;
-        document.getElementById('preview_tax_amount').textContent = '$' + taxAmount.toFixed(2);
+        document.getElementById('preview_tax_amount').textContent = formatCurrency(taxAmount);
         document.getElementById('preview_total_amount').textContent = totalAmount;
 
         // Payment info

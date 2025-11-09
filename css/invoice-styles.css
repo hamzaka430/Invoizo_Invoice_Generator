@@ -136,7 +136,8 @@
 }
 
 .invoice-form .form-group input,
-.invoice-form .form-group textarea {
+.invoice-form .form-group textarea,
+.invoice-form .form-group select {
     width: 100%;
     padding: 15px 0;
     border: none;
@@ -148,8 +149,25 @@
     color: var(--text-dark);
 }
 
+.invoice-form .form-group select {
+    cursor: pointer;
+    padding-right: 20px;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0px center;
+    background-size: 20px;
+}
+
+.invoice-form .form-group select option {
+    background: white;
+    color: var(--text-dark);
+    padding: 10px;
+}
+
 .invoice-form .form-group input:focus,
-.invoice-form .form-group textarea:focus {
+.invoice-form .form-group textarea:focus,
+.invoice-form .form-group select:focus {
     outline: none;
     padding-left: 20px;
     border-bottom-color: var(--primary-orange);
@@ -171,7 +189,9 @@
 .invoice-form .form-group input:not(:placeholder-shown) + label,
 .invoice-form .form-group input[readonly] + label,
 .invoice-form .form-group textarea:focus + label,
-.invoice-form .form-group textarea:not(:placeholder-shown) + label {
+.invoice-form .form-group textarea:not(:placeholder-shown) + label,
+.invoice-form .form-group select:focus + label,
+.invoice-form .form-group select:valid + label {
     top: -20px;
     font-size: 11px;
     font-weight: 500;
