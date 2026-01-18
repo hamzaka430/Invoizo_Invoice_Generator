@@ -1,0 +1,7 @@
+
+
+[build]
+  publish = "."
+  # No build command needed for static HTML/CSS/JS
+
+
