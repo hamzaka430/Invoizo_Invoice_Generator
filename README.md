@@ -112,7 +112,7 @@ No build tools or dependencies required — it's a static site! You just need a 
 
 ## 👤 Author
 
-**Hamza Khan** — [DezignWise](https://www.dezignwise.online/)
+**Hamza Zaka** — [DezignWise](https://www.dezignwise.online/)
 
 - GitHub: [@hamzaka430](https://github.com/hamzaka430)
 
